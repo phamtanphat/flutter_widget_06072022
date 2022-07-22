@@ -35,7 +35,46 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Home Page"),
       ),
       body: Container(
-        color: Colors.green,
+        constraints: BoxConstraints.expand(),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                color: Colors.indigo,
+                child: Text(
+                    "View A",
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20)
+                )
+            ),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                color: Colors.orange,
+                child: Text(
+                    "View B",
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 20)
+                )
+            ),
+            Expanded(
+              child: Container(
+                  constraints: BoxConstraints.expand(),
+                  color: Colors.purple,
+                  child: Text(
+                      "View C",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20)
+                  )
+              ),
+            ),
+          ],
+        )
       ),
     );
   }

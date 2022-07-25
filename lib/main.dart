@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_06072022/orientation_widget.dart';
+import 'package:flutter_widget_06072022/relative_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Home Page"),
       ),
-      body: OrientationWidget()
+      body: RelativeWidget()
     );
   }
 }

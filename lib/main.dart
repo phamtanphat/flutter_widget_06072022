@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_06072022/orientation_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,54 +36,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Home Page"),
       ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        color: Colors.white,
-        child: Column(
-          children: [
-            Flexible(
-              flex: 2,
-              child: Container(
-                  constraints: BoxConstraints.expand(),
-                  color: Colors.indigo,
-                  child: Text(
-                      "View A",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 20)
-                  )
-              ),
-            ),
-            Flexible(
-              flex: 2,
-              child: Container(
-                  constraints: BoxConstraints.expand(),
-                  color: Colors.orange,
-                  child: Text(
-                      "View B",
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 20)
-                  )
-              ),
-            ),
-            Expanded(
-              child: Container(
-                  constraints: BoxConstraints.expand(),
-                  color: Colors.purple,
-                  child: Center(
-                    child: Text(
-                        "View C",
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 20)
-                    ),
-                  )
-              ),
-            ),
-          ],
-        )
-      ),
+      body: OrientationWidget()
     );
   }
 }

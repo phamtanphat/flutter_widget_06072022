@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class RelativeWidget extends StatefulWidget {
   const RelativeWidget({Key? key}) : super(key: key);
@@ -10,24 +13,33 @@ class RelativeWidget extends StatefulWidget {
 class _RelativeWidgetState extends State<RelativeWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.expand(),
+    return Center(
       child: Stack(
-        fit: StackFit.loose,
-        alignment: Alignment.center,
         children: [
           Container(
-              width: 250,
-              height: 250,
-              color: Colors.red,
-              child: Text("View A")
+            height: 300,
+            width: 200,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+            ),
           ),
-          Container(
-              width: 150,
-              height: 150,
-              color: Colors.blue,
-              child: Text("View B")
-          ),
+          Positioned(
+            top: 100,
+            left: 100,
+            child: SizedBox(
+              height: 300,
+              width: 200,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+              ),
+            ),
+          )
         ],
       ),
     );

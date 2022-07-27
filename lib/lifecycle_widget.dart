@@ -1,14 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-class LifecycleWidget extends StatefulWidget {
 
+class LifecycleWidget extends StatefulWidget {
   @override
   State<LifecycleWidget> createState() => _LifecycleWidgetState();
 }
 
 class _LifecycleWidgetState extends State<LifecycleWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -37,27 +36,44 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
         constraints: const BoxConstraints.expand(),
         child: Column(
           children: [
-             Flexible(
-                flex: 2,
-                child: InkWell(
-                  onTap: () {
-                    ScaffoldMessenger
-                        .of(context)
-                        .showSnackBar(const SnackBar(content: Text("Click me")));
-                },
-                  child: const Center(
-                    child: const Text(
-                        "Máy tính bỏ túi",
-                        style: const TextStyle(
-                            color: Colors.red,
-                            fontSize: 30,
-                            fontFamily: "edu",
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-                  ),
-                ),
+            Flexible(
+              flex: 2,
+              child: const Center(
+                child: const Text("Máy tính bỏ túi",
+                    style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 30,
+                        fontFamily: "edu",
+                        fontWeight: FontWeight.bold)),
+              ),
             ),
+            Flexible(
+                flex: 3,
+                child: Container(
+                  constraints: BoxConstraints.expand(),
+                  child: Column(
+                    children: [
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: "Input number 1",
+                          prefixIcon: Icon(
+                              Icons.looks_one_outlined,
+                              color: Colors.red,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 3, color: Colors.greenAccent)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 3, color: Colors.greenAccent)
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(onPressed: (){}, child: Text("Click"))
+                    ],
+                  ),
+                )
+            )
           ],
         ),
       ),

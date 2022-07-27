@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_06072022/lifecycle_widget.dart';
 import 'package:flutter_widget_06072022/orientation_widget.dart';
 import 'package:flutter_widget_06072022/relative_widget.dart';
 
@@ -18,27 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage()
+      routes: {
+        "/lifecycle-widget": (context) => LifecycleWidget()
+      },
+      initialRoute: "/lifecycle-widget",
     );
   }
 }
-
-class HomePage extends StatefulWidget {
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-//state object
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home Page"),
-      ),
-      body: RelativeWidget()
-    );
-  }
-}
-

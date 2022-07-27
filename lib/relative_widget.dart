@@ -16,32 +16,26 @@ class _RelativeWidgetState extends State<RelativeWidget> {
     return Center(
       child: Stack(
         children: [
-          Container(
-            height: 300,
-            width: 200,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-            ),
-          ),
           Positioned(
-            top: 100,
-            left: 100,
-            child: SizedBox(
-              height: 300,
-              width: 200,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    border: Border.all(),
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-              ),
-            ),
-          )
+              top: 50,
+              child: createItem(text: "A", color: Colors.blue)),
+          Positioned(
+              top: 100,
+              left: 60,
+              child: createItem(text: "A", color: Colors.red))
         ],
       ),
+    );
+  }
+
+  Widget createItem({String text = "", Color color = Colors.blue}) {
+    return Container(
+      color: Colors.red[400],
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      decoration: BoxDecoration(
+        color: color,
+      ),
+      child: Text(text, style: TextStyle(color: Colors.white),),
     );
   }
 }

@@ -31,27 +31,33 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lifecycle Widget"),
+        title: const Text("Lifecycle Widget"),
       ),
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: Column(
           children: [
-            Flexible(
+             Flexible(
                 flex: 2,
-                child: Center(
-                  child: Text(
-                      "Máy tính bỏ túi",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 30,
-                          fontFamily: "Roboto",
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold
-                      )
+                child: InkWell(
+                  onTap: () {
+                    ScaffoldMessenger
+                        .of(context)
+                        .showSnackBar(const SnackBar(content: Text("Click me")));
+                },
+                  child: const Center(
+                    child: const Text(
+                        "Máy tính bỏ túi",
+                        style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 30,
+                            fontFamily: "edu",
+                            fontWeight: FontWeight.bold
+                        )
+                    ),
                   ),
                 ),
-            )
+            ),
           ],
         ),
       ),

@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "edu",
+        textTheme: const TextTheme(
+          headline6: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       routes: {
         "/lifecycle-widget": (context) => LifecycleWidget()

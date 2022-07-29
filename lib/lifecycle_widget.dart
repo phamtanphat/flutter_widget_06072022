@@ -11,6 +11,7 @@ class LifecycleWidget extends StatefulWidget {
 class _LifecycleWidgetState extends State<LifecycleWidget> {
   TextEditingController textControllerNumber1 = TextEditingController();
   TextEditingController textControllerNumber2 = TextEditingController();
+  var result;
 
   /**
    * Event Click Button Plus
@@ -18,9 +19,16 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
   void onPressButtonPlus() {
     var textNumber1 = textControllerNumber1.text;
     var textNumber2 = textControllerNumber2.text;
-    if (textNumber1.isNotEmpty && textNumber2.isNotEmpty) {
-
-    }
+    setState(() {
+      if (textNumber1.isEmpty || textNumber2.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Data empty")));
+        result = null;
+        return;
+      }
+      setState(() {
+        result = int.parse(textNumber1) + int.parse(textNumber2);
+      });
+    });
   }
 
   /**
@@ -85,9 +93,10 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
                   ),
                   Flexible(
                       flex: 1,
-                      child: Container(
+                      child: Visibility(
+                        visible: result != null,
                         child: Center(
-                            child: Text("Result = 0", style: TextStyle(color: Colors.red, fontSize: 20))
+                            child: Text("Result = $result", style: TextStyle(color: Colors.red, fontSize: 20))
                         ),
                       )
                   ),

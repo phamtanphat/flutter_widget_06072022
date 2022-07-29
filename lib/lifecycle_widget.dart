@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LifecycleWidget extends StatefulWidget {
@@ -11,29 +12,15 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
   TextEditingController textControllerNumber1 = TextEditingController();
   TextEditingController textControllerNumber2 = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    print("initState");
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    print("didChangeDependencies");
-  }
-
-  @override
-  void didUpdateWidget(covariant LifecycleWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget");
-  }
-
   /**
    * Event Click Button Plus
    */
   void onPressButtonPlus() {
+    var textNumber1 = textControllerNumber1.text;
+    var textNumber2 = textControllerNumber2.text;
+    if (textNumber1.isNotEmpty && textNumber2.isNotEmpty) {
 
+    }
   }
 
   /**
@@ -58,68 +45,80 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Lifecycle Widget"),
-      ),
-      body: Container(
-        constraints: const BoxConstraints.expand(),
-        child: Column(
-          children: [
-            Flexible(
-              flex: 2,
-              child: const Center(
-                child: const Text("Máy tính bỏ túi",
-                    style: const TextStyle(
-                        color: Colors.red,
-                        fontSize: 30
-                    )),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Lifecycle Widget"),
+        ),
+        body: Container(
+          constraints: const BoxConstraints.expand(),
+          child: SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: const Center(
+                      child: const Text("Máy tính bỏ túi",
+                          style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 30
+                          )),
+                    ),
+                  ),
+                  Flexible(
+                      flex: 3,
+                      child: Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            createTextFieldWidget(hintText: "Input number 1", controller: textControllerNumber1),
+                            createTextFieldWidget(hintText: "Input number 2", controller: textControllerNumber2),
+                          ],
+                        ),
+                      )
+                  ),
+                  Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Center(
+                            child: Text("Result = 0", style: TextStyle(color: Colors.red, fontSize: 20))
+                        ),
+                      )
+                  ),
+                  Flexible(
+                      flex: 4,
+                      child: Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            createRowButton(
+                                buttonName1: "+",
+                                buttonName2: "-",
+                                onPressButton1: onPressButtonPlus,
+                                onPressButton2: onPressButtonMinute
+                            ),
+                            SizedBox(height: 20),
+                            createRowButton(
+                                buttonName1: "*",
+                                buttonName2: "/",
+                                onPressButton1: onPressButtonMultiplication,
+                                onPressButton2: onPressButtonDivide
+                            ),
+                          ],
+                        ),
+                      )
+                  )
+                ],
               ),
             ),
-            Flexible(
-                flex: 3,
-                child: Container(
-                  constraints: BoxConstraints.expand(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      createTextFieldWidget(hintText: "Input number 1", controller: textControllerNumber1),
-                      createTextFieldWidget(hintText: "Input number 2", controller: textControllerNumber2),
-                    ],
-                  ),
-                )
-            ),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  child: Center(
-                      child: Text("Result = 0", style: TextStyle(color: Colors.red, fontSize: 20))
-                  ),
-                )
-            ),
-            Flexible(
-                flex: 4,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      createRowButton(
-                          buttonName1: "+",
-                          buttonName2: "-",
-                          onPressButton1: onPressButtonPlus,
-                          onPressButton2: onPressButtonMinute
-                      ),
-                      createRowButton(
-                          buttonName1: "*",
-                          buttonName2: "/",
-                          onPressButton1: onPressButtonMultiplication,
-                          onPressButton2: onPressButtonDivide
-                      ),
-                    ],
-                  ),
-                )
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -166,6 +165,8 @@ class _LifecycleWidgetState extends State<LifecycleWidget> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
+        keyboardType: TextInputType.number,
+        maxLength: 5,
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,

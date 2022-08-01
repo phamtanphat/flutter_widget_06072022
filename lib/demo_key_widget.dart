@@ -9,14 +9,24 @@ class DemoKeyWidget extends StatefulWidget {
 }
 
 class _DemoKeyWidgetState extends State<DemoKeyWidget> {
-  var listTile = <Widget>[Tile(), Tile()]; // tạo 1 list lưu trữ 2 Widget
+  var listTile = <Widget>[
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Tile(key: GlobalKey()),
+    ),
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Tile(key: GlobalKey()),
+    )
+  ]; // tạo 1 list lưu trữ 2 Widget
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Row(
-          children: listTile, // Row nhận một list Widget nên mình truyền listTile vào
+          children:
+              listTile, // Row nhận một list Widget nên mình truyền listTile vào
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -37,13 +47,16 @@ class _DemoKeyWidgetState extends State<DemoKeyWidget> {
 }
 
 class Tile extends StatefulWidget {
+  Tile({Key? key}) : super(key: key);
+
   @override
   State<Tile> createState() => _TileState();
 }
 
 class _TileState extends State<Tile> {
   final Color color = generateRandomColor();
- // mỗi object sẽ có 1 random Color không thể thay đổi
+
+  // mỗi object sẽ có 1 random Color không thể thay đổi
   @override
   Widget build(BuildContext context) {
     // tạm hiểu Container như cái thùng có màu sắc, kích thước => khá giống viên gạch =))
@@ -61,5 +74,6 @@ Color generateRandomColor() {
   final Random random = Random();
 
   // Màu sắc được tạo nên từ RGB, là một số ngẫu nhiên từ 0 -> 255 và opacity = 1
-  return Color.fromRGBO(random.nextInt(255), random.nextInt(255), random.nextInt(255), 1);
+  return Color.fromRGBO(
+      random.nextInt(255), random.nextInt(255), random.nextInt(255), 1);
 }

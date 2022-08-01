@@ -1,68 +1,101 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-class DemoInheritedWidget extends StatefulWidget {
-  const DemoInheritedWidget({Key? key}) : super(key: key);
+class DemoBuildContextPage extends StatelessWidget {
 
-  @override
-  State<DemoInheritedWidget> createState() => _DemoInheritedWidgetState();
-}
-
-class _DemoInheritedWidgetState extends State<DemoInheritedWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Demo Inherited Widget"),
+        title: Text("Demo Build Context"),
       ),
-      body: InheritedContainer(
-        listWidget: [
-          TextWidget(text: "Hello")
-        ],
+      body: Container(
+        child: OngBa(
+          child: Chame(
+          ),
+        ),
       ),
     );
   }
 }
 
-class InheritedContainer extends StatefulWidget {
-  List<Widget>? listWidget;
-  InheritedContainer({Key? key, this.listWidget}) : super(key: key);
+class OngBa extends StatelessWidget {
 
-  @override
-  State<InheritedContainer> createState() => _InheritedContainerState();
-}
+  Widget child;
+  String title = "abc";
 
-class _InheritedContainerState extends State<InheritedContainer> {
+  OngBa({required this.child});
 
+  static OngBa? of(BuildContext context){
+    return context.findAncestorWidgetOfExactType<OngBa>();
+  }
   @override
   Widget build(BuildContext context) {
-    final widgetParent = widget.listWidget?[0] ?? SizedBox();
     return Container(
-      constraints: BoxConstraints.expand(),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          widgetParent,
-          ElevatedButton(
-              onPressed: (){
-
-              },
-              child: Text("Change Text")
-          )
+          Text("Ong ba"),
+          child
         ],
       ),
     );
   }
 }
 
+class Chame extends StatefulWidget {
 
-class TextWidget extends StatelessWidget {
-  String text = "";
-  TextWidget({Key? key, String text = ""}) : super(key: key) {
-    this.text = text;
+
+
+  @override
+  _ChameState createState() => _ChameState();
+
+  static _ChameState of(BuildContext context){
+    return context.findAncestorStateOfType<_ChameState>()!;
+  }
+}
+// state object
+
+class _ChameState extends State<Chame> {
+
+  int number = 123;
+
+  void updateNumber(int value){
+    setState(() {
+      number = value;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text(text);
+    OngBa? ongBa = OngBa.of(context);
+    print(number);
+    return Container(
+      child: Column(
+        children: [
+          Text("Cha me"),
+          Concai()
+        ],
+      ),
+    );
   }
 }
 
+class Concai extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    _ChameState state = Chame.of(context);
+    print("Build con cai");
+    return Container(
+      child: Column(
+        children: [
+          Text("Con cai"),
+          Text(state.number.toString()),
+          TextButton(onPressed: (){
+            state.updateNumber(Random().nextInt(10) + 1);
+          }, child: Text("Random"))
+        ],
+      ),
+    );
+  }
+}

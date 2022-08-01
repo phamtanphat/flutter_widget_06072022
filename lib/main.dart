@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "/lifecycle-widget": (context) => LifecycleWidget(),
         "/demo_key_inherited_widget": (context) => DemoKeyWidget(),
+        "/inherited_widget": (context) => DemoInheritedWidget(),
       },
-      initialRoute: "/demo_key_inherited_widget",
+      initialRoute: "/inherited_widget",
     );
   }
 }

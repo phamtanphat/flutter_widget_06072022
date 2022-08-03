@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-class DemoBuildContextPage extends StatelessWidget {
+import 'package:flutter/rendering.dart';
+class DemoInheritedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -9,93 +10,62 @@ class DemoBuildContextPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Demo Build Context"),
       ),
-      body: Container(
-        child: OngBa(
-          child: Chame(
-          ),
-        ),
+      body: ParentContainer(
+        child: Children(),
       ),
     );
   }
 }
 
-class OngBa extends StatelessWidget {
+class ParentContainer extends StatefulWidget {
 
-  Widget child;
-  String title = "abc";
+  Widget? child;
 
-  OngBa({required this.child});
-
-  static OngBa? of(BuildContext context){
-    return context.findAncestorWidgetOfExactType<OngBa>();
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text("Ong ba"),
-          child
-        ],
-      ),
-    );
-  }
-}
-
-class Chame extends StatefulWidget {
-
-
+  ParentContainer({this.child});
 
   @override
-  _ChameState createState() => _ChameState();
-
-  static _ChameState of(BuildContext context){
-    return context.findAncestorStateOfType<_ChameState>()!;
-  }
+  State<ParentContainer> createState() => _ParentContainerState();
 }
-// state object
 
-class _ChameState extends State<Chame> {
+class _ParentContainerState extends State<ParentContainer> {
+  int number = 0;
 
-  int number = 123;
-
-  void updateNumber(int value){
+  void randomNumber() {
     setState(() {
-      number = value;
+      number = Random().nextInt(100);
+      print(number);
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    OngBa? ongBa = OngBa.of(context);
-    print(number);
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Text("Cha me"),
-          Concai()
+          Text("Value = $number", style: TextStyle(fontSize: 30),),
+          ElevatedButton(
+              onPressed: (){
+                randomNumber();
+              },
+              child: Text("Random number")
+          ),
+          widget.child ?? SizedBox(),
         ],
       ),
     );
   }
 }
 
-class Concai extends StatelessWidget {
+class Children extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _ChameState state = Chame.of(context);
-    print("Build con cai");
     return Container(
-      child: Column(
-        children: [
-          Text("Con cai"),
-          Text(state.number.toString()),
-          TextButton(onPressed: (){
-            state.updateNumber(Random().nextInt(10) + 1);
-          }, child: Text("Random"))
-        ],
+      child: Center(
+        child: Text("Children"),
       ),
     );
   }
 }
+

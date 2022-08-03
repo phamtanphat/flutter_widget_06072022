@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_06072022/demo_context_widget.dart';
 import 'package:flutter_widget_06072022/demo_key_widget.dart';
 
+import 'inherited_widget.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,10 +26,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         // "/lifecycle-widget": (context) => LifecycleWidget(),
-        // "/demo_key_inherited_widget": (context) => DemoKeyWidget(),
-        "/demo_context_widget": (context) => DemoBuildContextPage(),
+        "/demo_key_inherited_widget": (context) => DemoInheritedWidget(),
+        // "/demo_context_widget": (context) => DemoBuildContextPage(),
       },
-      initialRoute: "/demo_context_widget",
+      initialRoute: "/demo_key_inherited_widget",
     );
   }
 }

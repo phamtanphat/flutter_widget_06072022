@@ -50,7 +50,10 @@ class _ParentContainerState extends State<ParentContainer> {
               },
               child: Text("Random number")
           ),
-          widget.child ?? SizedBox(),
+          MyInheritedContainer(
+              child: widget.child ?? SizedBox(),
+              number: number
+          )
         ],
       ),
     );
@@ -66,20 +69,24 @@ class MyInheritedContainer extends InheritedWidget {
     this.number = number;
   }
 
+  static MyInheritedContainer? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType();
+  }
+
   @override
   bool updateShouldNotify(covariant MyInheritedContainer oldWidget) {
     return true;
   }
-
 }
 
 class Children extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyInheritedContainer? containerValue = MyInheritedContainer.of(context);
     return Container(
       child: Center(
-        child: Text("Children"),
+        child: Text("Children ${containerValue?.number ?? 0}"),
       ),
     );
   }

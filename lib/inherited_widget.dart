@@ -57,6 +57,22 @@ class _ParentContainerState extends State<ParentContainer> {
   }
 }
 
+class MyInheritedContainer extends InheritedWidget {
+  late Widget child;
+  late int number;
+
+  MyInheritedContainer({required Widget child,required int number}) : super(child: child) {
+    this.child = child;
+    this.number = number;
+  }
+
+  @override
+  bool updateShouldNotify(covariant MyInheritedContainer oldWidget) {
+    return true;
+  }
+
+}
+
 class Children extends StatelessWidget {
 
   @override

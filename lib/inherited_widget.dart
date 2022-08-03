@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 class DemoInheritedWidget extends StatelessWidget {
@@ -11,7 +10,12 @@ class DemoInheritedWidget extends StatelessWidget {
         title: Text("Demo Build Context"),
       ),
       body: ParentContainer(
-        child: Children(),
+        child: Column(
+          children: [
+            Children(),
+            Children2()
+          ],
+        ),
       ),
     );
   }
@@ -92,3 +96,15 @@ class Children extends StatelessWidget {
   }
 }
 
+class Children2 extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    print("Children2 build");
+    return Container(
+      child: Center(
+        child: Text("Children2"),
+      ),
+    );
+  }
+}
